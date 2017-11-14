@@ -7,14 +7,33 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.Net.Http;
-using System.IO;
-using Android.Graphics;
+using System.Collections.Generic;
+using Android.Content.PM;
+using Android.Provider;
 
-namespace FoodieVision-Client
+namespace FoodieVisionClient
 {
-    [Activity(Label = "camera", MainLauncher = true, Theme = "@style/android:Theme.Holo.Light.NoActionBar")]
+    [Activity(Label = "Camera", Theme = "@style/android:Theme.Holo.Light.NoActionBar")]
     public class CameraActivity : Activity
     {
-     
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.MainLayout);
+
+            //Initializing button from layout
+            Button login = FindViewById<Button>(Resource.Id.CameraButton);
+
+            //Login button click action
+            login.Click += (object sender, EventArgs e) => {
+
+                Android.Widget.Toast.MakeText(this, "Camera Button Clicked!", Android.Widget.ToastLength.Short).Show();
+                StartActivity(typeof(CameraActivity));
+
+            };
+        }
+
     }
 }

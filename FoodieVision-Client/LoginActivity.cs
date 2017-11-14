@@ -8,9 +8,9 @@ using Android.Widget;
 using Android.OS;
 using System.Net.Http;
 
-namespace FoodieVision-Client
+namespace FoodieVisionClient
 {
-    [Activity(Label = "POIApplication", MainLauncher = true, Theme = "@style/android:Theme.Holo.Light.NoActionBar")]
+    [Activity(Label = "FoodieVision", MainLauncher = true, Theme = "@style/android:Theme.Holo.Light.NoActionBar")]
     public class LoginActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
