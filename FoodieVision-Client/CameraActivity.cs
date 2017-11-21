@@ -14,15 +14,6 @@ using Android.Provider;
 using Java.IO;
 using Android.Graphics;
 using System.Diagnostics.Contracts;
-using System;
-
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
-using System.Net.Http;
 
 namespace FoodieVisionClient
 {
@@ -90,11 +81,11 @@ namespace FoodieVisionClient
             {
                 CreateDirectoryForPictures();
 
-                Button pic = FindViewById<Button>(Resource.Id.myButton);
+               // Button pic = FindViewById<Button>(Resource.Id.myButton);
                 _imageView = FindViewById<ImageView>(Resource.Id.imageView1);
                
 
-                pic.Click += (sender, e) => TakeAPicture();
+                 TakeAPicture();
 
 
 
