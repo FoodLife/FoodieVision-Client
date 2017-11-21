@@ -14,6 +14,15 @@ using Android.Provider;
 using Java.IO;
 using Android.Graphics;
 using System.Diagnostics.Contracts;
+using System;
+
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;
+using System.Net.Http;
 
 namespace FoodieVisionClient
 {
@@ -75,22 +84,25 @@ namespace FoodieVisionClient
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.CameraLayout);
 
             if (IsThereAnAppToTakePictures())
             {
                 CreateDirectoryForPictures();
 
-                Button button = FindViewById<Button>(Resource.Id.myButton);
+                Button pic = FindViewById<Button>(Resource.Id.myButton);
                 _imageView = FindViewById<ImageView>(Resource.Id.imageView1);
+               
 
-                //button.Click += TakeAPicture; 
-                TakeAPicture();
-            }
+                pic.Click += (sender, e) => TakeAPicture();
+
+
+
+
+
+                }
 
         }
-
-
 
         private void CreateDirectoryForPictures()
         {
@@ -111,7 +123,7 @@ namespace FoodieVisionClient
             return availableActivities != null && availableActivities.Count > 0;
         }
 
-        private void TakeAPicture(object sender, EventArgs eventArgs)
+        private void TakeAPicture()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
 
