@@ -140,25 +140,34 @@ namespace FoodieVisionClient
 
                 var bytes = stream.ToArray();
                 var str = Convert.ToBase64String(bytes);
-                string sUrl = "http://34.232.146.205/hello";
+                string sUrl = "http://34.232.146.205/foodies/is_food";
                 string sContentType = "application/json"; // or application/xml
 
                 JObject oJsonObject = new JObject();
-                oJsonObject.Add("image", "testing");
-                string test = "";
+                oJsonObject.Add("image", str);
+                //string test = "";
 
-                System.Console.WriteLine("Sent=  "+oJsonObject); 
+               // Android.Widget.Toast.MakeText(this, oJsonObject.ToString(), Android.Widget.ToastLength.Long).Show();
 
-                TextView tv = FindViewById<TextView>(Resource.Id.textView1);
+               /// System.Console.WriteLine("Sent=  "+ str ); 
 
-                tv.Text = "";
+
+
 
                 HttpClient oHttpClient = new HttpClient();
-                HttpResponseMessage oTaskPostAsync = await oHttpClient.PostAsync(sUrl, new StringContent(oJsonObject.ToString(), Encoding.UTF8, sContentType));
+                //HttpResponseMessage oTaskPostAsync = await oHttpClient.PostAsync(sUrl, new StringContent(oJsonObject.ToString(), Encoding.UTF8, sContentType));
+
+                using (var client = new HttpClient())
+                {
+                    var result = client.PostAsync(sUrl, new StringContent(oJsonObject.ToString(), Encoding.UTF8, sContentType)).Result;
+                    result.EnsureSuccessStatusCode();
+                    Android.Widget.Toast.MakeText(this, result.Content.ReadAsStringAsync().Result, Android.Widget.ToastLength.Long).Show();
+                    TextView tv = FindViewById<TextView>(Resource.Id.textView1);
+
+                    tv.Text = result.Content.ReadAsStringAsync().Result;
+                }
 
 
-                 test = Newtonsoft.Json.JsonConvert.SerializeObject(oTaskPostAsync);        
-                System.Console.WriteLine(test);
            
             }
            
