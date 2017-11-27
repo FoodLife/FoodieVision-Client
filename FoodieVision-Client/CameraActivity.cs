@@ -140,22 +140,19 @@ namespace FoodieVisionClient
 
                 var bytes = stream.ToArray();
                 var str = Convert.ToBase64String(bytes);
+                //var str =  "R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
                 string sUrl = "http://34.232.146.205/foodies/is_food";
                 string sContentType = "application/json"; // or application/xml
 
                 JObject oJsonObject = new JObject();
                 oJsonObject.Add("image", str);
-                //string test = "";
-
-               // Android.Widget.Toast.MakeText(this, oJsonObject.ToString(), Android.Widget.ToastLength.Long).Show();
-
-               /// System.Console.WriteLine("Sent=  "+ str ); 
+                oJsonObject.Add("user_token", "placeholder");
 
 
-
+                Android.Widget.Toast.MakeText(this, oJsonObject.ToString(), Android.Widget.ToastLength.Long).Show();
 
                 HttpClient oHttpClient = new HttpClient();
-                //HttpResponseMessage oTaskPostAsync = await oHttpClient.PostAsync(sUrl, new StringContent(oJsonObject.ToString(), Encoding.UTF8, sContentType));
+
 
                 using (var client = new HttpClient())
                 {
@@ -166,9 +163,6 @@ namespace FoodieVisionClient
 
                     tv.Text = result.Content.ReadAsStringAsync().Result;
                 }
-
-
-           
             }
            
         }
