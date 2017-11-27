@@ -14,10 +14,17 @@
             android:id="@+id/CameraButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password"
             android:layout_marginTop="10dp"
             android:background="#307FC1"
             android:text="Take Picture"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/TimeLineButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#307FC1"
+            android:text="Time Line"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </RelativeLayout>

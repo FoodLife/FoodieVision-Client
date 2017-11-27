@@ -25,12 +25,19 @@ namespace FoodieVisionClient
 
             //Initializing button from layout
             Button login = FindViewById<Button>(Resource.Id.CameraButton);
+            Button timeLine = FindViewById<Button>(Resource.Id.TimeLineButton);
 
             //Login button click action
             login.Click += (object sender, EventArgs e) => {
 
                 Android.Widget.Toast.MakeText(this, "Camera Button Clicked!", Android.Widget.ToastLength.Short).Show();
                 StartActivity(typeof(CameraActivity));
+
+            };
+            timeLine.Click += (object sender, EventArgs e) => {
+
+                Android.Widget.Toast.MakeText(this, "TimeLine Button Clicked!", Android.Widget.ToastLength.Short).Show();
+                StartActivity(typeof(TimeLineActivity));
 
             };
         }

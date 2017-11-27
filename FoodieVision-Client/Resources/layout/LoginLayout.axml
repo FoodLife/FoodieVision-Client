@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:background="#2579BF"
     android:orientation="vertical">
+    <ImageView
+        android:layout_width="156dp"
+        android:layout_height="126dp"
+        android:id="@+id/imageView1"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -11,7 +17,7 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/userName"
+            android:id="@+id/userNameBox"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:padding="5dp"
@@ -22,7 +28,7 @@
             android:layout_height="2dp"
             android:background="#f7f7f7" />
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordBox"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:padding="5dp"
@@ -33,7 +39,6 @@
             android:id="@+id/login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password"
             android:layout_marginTop="10dp"
             android:background="#307FC1"
             android:text="Login"

@@ -6,11 +6,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using System.Net.Http;
+using System.Net;
 using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
-
 using Java.IO;
 using Android.Graphics;
 using System.Diagnostics.Contracts;
@@ -20,6 +19,7 @@ namespace FoodieVisionClient
     
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using Android.App;
     using Android.Content;
     using Android.Content.PM;
@@ -27,9 +27,13 @@ namespace FoodieVisionClient
     using Android.OS;
     using Android.Provider;
     using Android.Widget;
+    using Android.Net;
     using Java.IO;
     using Environment = Android.OS.Environment;
     using Uri = Android.Net.Uri;
+    using System.Net.Http;
+    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
 
     public static class App
     {
@@ -38,7 +42,7 @@ namespace FoodieVisionClient
         public static Bitmap bitmap;
     }
 
-    [Activity(Label = "Camera App Demo")]
+    [Activity(Label = "Camera view", Theme = "@style/android:Theme.Holo.Light.NoActionBar")]
     public class CameraActivity : Activity
     {
 
@@ -62,9 +66,11 @@ namespace FoodieVisionClient
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = _imageView.Height;
             App.bitmap = App._file.Path.LoadAndResizeBitmap(width, height);
+            //SendToSever();
             if (App.bitmap != null)
             {
                 _imageView.SetImageBitmap(App.bitmap);
+                SendToSever();
                 App.bitmap = null;
             }
 
@@ -122,7 +128,40 @@ namespace FoodieVisionClient
 
             intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
 
+
             StartActivityForResult(intent, 0);
+        }
+        private async void SendToSever()
+        {
+            
+            using (var stream = new System.IO.MemoryStream())
+            {
+                App.bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
+
+                var bytes = stream.ToArray();
+                var str = Convert.ToBase64String(bytes);
+                string sUrl = "http://34.232.146.205/hello";
+                string sContentType = "application/json"; // or application/xml
+
+                JObject oJsonObject = new JObject();
+                oJsonObject.Add("image", "testing");
+                string test = "";
+
+                System.Console.WriteLine("Sent=  "+oJsonObject); 
+
+                TextView tv = FindViewById<TextView>(Resource.Id.textView1);
+
+                tv.Text = "";
+
+                HttpClient oHttpClient = new HttpClient();
+                HttpResponseMessage oTaskPostAsync = await oHttpClient.PostAsync(sUrl, new StringContent(oJsonObject.ToString(), Encoding.UTF8, sContentType));
+
+
+                 test = Newtonsoft.Json.JsonConvert.SerializeObject(oTaskPostAsync);        
+                System.Console.WriteLine(test);
+           
+            }
+           
         }
     }
 }

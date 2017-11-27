@@ -18,10 +18,12 @@ namespace FoodieVisionClient
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Login);
+            SetContentView(Resource.Layout.LoginLayout);
+            //SetContentView(Resource.Drawable.logo);
 
             //Initializing button from layout
             Button login = FindViewById<Button>(Resource.Id.login);
+
 
             //Login button click action
             login.Click += (object sender, EventArgs e) => {
